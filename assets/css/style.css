@@ -271,6 +271,13 @@ ul li:nth-child(5):hover{
   border-radius: 25px;
   color: white;
 }
+
+
+.fa-youtube {
+	background: rgb(255, 23, 23);
+  border-radius: 25px;
+  color: white;
+}
 .wavy
 {
     position: relative;
