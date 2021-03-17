@@ -1,45 +1,50 @@
-*
-{
-    margin: 0;
-    padding: 0;
-    font-family: consolas;
+ padding: 0;
+ margin: 0;
+ 
+ &__layer {
+  --text-color: var(--color-foreground);
+  counter-increment: rainbow; 
+  font-size: 3rem;
+  color: var(--text-color);
+
+  text-shadow:
+   -1px -1px 0 var(--color-black),  
+    1px -1px 0 var(--color-black),
+    -1px 1px 0 var(--color-black),
+     1px 1px 0 var(--color-black),
+   
+     4px 4px 0 rgba(0, 0, 0, .2);
+  
+  animation: rainbow 1.5s ease-in-out infinite;
+  
+  @for $i from 1 through 7 {
+   &:nth-child(#{$i}) {
+    animation-delay: calc( #{$i} / var(--delay) * 1s);
+    left: calc(var(--axis-x) * #{$i});
+    z-index: -#{$i * 10};
+   }
+  }
+  
+  &:not(:first-child) {
+   position: absolute;
+   top: 0;
+  }
+
+  &--white  { --text-color: var(--color-white)}
+  &--orange { --text-color: var(--color-orange)}
+  &--red    { --text-color: var(--color-red)}
+  &--violet { --text-color: var(--color-violet)}
+  &--blue   { --text-color: var(--color-blue)}
+  &--green  { --text-color: var(--color-green)}
+  &--yellow { --text-color: var(--color-yellow)}
+ }
 }
-body
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
-    background: #000;
-}
-.wavy
-{
-    position: relative;
-    -webkit-box-reflect: below -12px linear-gradient(
-        transparent, rgba(0,0,0,0,2));
-}
-.wavy span
-{
-    position: relative;
-    display: inline-block;
-    color: #fff;
-    font-size: 1em;
-    text-transform: uppercase;
-     animation: animate 1s ease-in-out infinite;
-     animation-delay: calc(0.1s * var(--i));
-}
-@keyframes animate
-{
-    0%
-    {
-        transform: translatey(0px);
-    }
-    20%
-    {
-        transform: translatey(-20px);
-    }
-    40%,100%
-    {
-        transform: translatey(0px);
-    }
-}
+
+@keyframes rainbow {
+ 0%, 100% {
+  transform: translatey(var(--axis-y)); 
+ }
+ 50% {
+  transform: translatey(calc(var(--axis-y) * -1));
+ }
+} 
